@@ -7,6 +7,7 @@ import animals.Wolf;
 import typeOfAnimal.AbstractAnimal;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -19,29 +20,45 @@ interface CreateAnimalService {
         String[] names = {"Buddy", "Max", "Charlie", "Bella", "Lucy", "Daisy", "Rocky", "Luna"};
         int randomIndex = random.nextInt(names.length);
 
+        String[] character = {"Aggressive", "Fierce", "Friendly", "Playful"};
+        int randomIndexCharacter= random.nextInt(character.length);
+
+        LocalDate birthDate = randBirthDate();
+
         while (uniqueAnimals.size() < 10) {
-            int randomAnimalType = random.nextInt(4); // Здесь 4 - количество возможных типов животных
+            int randomAnimalType = random.nextInt(4);
             AbstractAnimal animal = null;
 
             switch (randomAnimalType) {
                 case 0:
-                    animal = new Wolf("Wolf" + uniqueAnimals.size(), names[randomIndex], BigDecimal.valueOf(random.nextDouble() * 100), "Aggressive");
+                    animal = new Wolf("Wolf" + uniqueAnimals.size(), names[randomIndex],
+                            BigDecimal.valueOf(random.nextDouble() * 100), character[randomIndexCharacter],
+                            birthDate);
                     break;
                 case 1:
-                    animal = new Shark("Shark" + uniqueAnimals.size(), names[randomIndex], BigDecimal.valueOf(random.nextDouble() * 100), "Fierce");
+                    animal = new Shark("Shark" + uniqueAnimals.size(), names[randomIndex],
+                            BigDecimal.valueOf(random.nextDouble() * 100), character[randomIndexCharacter],
+                            birthDate);
                     break;
                 case 2:
-                    animal = new Dog("Dog" + uniqueAnimals.size(), names[randomIndex], BigDecimal.valueOf(random.nextDouble() * 100), "Friendly");
+                    animal = new Dog("Dog" + uniqueAnimals.size(), names[randomIndex],
+                            BigDecimal.valueOf(random.nextDouble() * 100), character[randomIndexCharacter],
+                            birthDate);
                     break;
                 case 3:
-                    animal = new Cat("Cat" + uniqueAnimals.size(), names[randomIndex], BigDecimal.valueOf(random.nextDouble() * 100), "Playful");
+                    animal = new Cat("Cat" + uniqueAnimals.size(), names[randomIndex],
+                            BigDecimal.valueOf(random.nextDouble() * 100), character[randomIndexCharacter],
+                            birthDate);
                     break;
             }
 
             uniqueAnimals.add(animal.getBreed());
-            System.out.println("Created: " + animal.getBreed());
+            System.out.println("Created: " + animal.getBreed() + " " + animal.getName() + " " + animal.getCharacter()
+                    + " " + animal.getCost() + " " + animal.getBirthDate());
         }
     }
+
+    LocalDate randBirthDate();
 
     void createAnimals(int n);
 }

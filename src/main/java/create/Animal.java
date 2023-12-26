@@ -1,6 +1,7 @@
 package create;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public interface Animal {
     /**
@@ -30,4 +31,8 @@ public interface Animal {
      * @return строка с описанием характера
      */
     String getCharacter();
+
+    LocalDate getBirthDate();
+
+    boolean equals(Object obj);
 }
